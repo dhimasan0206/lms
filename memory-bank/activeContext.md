@@ -23,6 +23,62 @@ The project is currently focused on three main areas:
    - Achievement criteria
    - Social media integration
 
+## Platform Expansion
+
+The project scope has been expanded to include:
+
+1. **BFF (Backend For Frontend) Architecture**
+   - Dedicated backends for web, mobile, and desktop clients
+   - Optimized data aggregation and transformation
+   - Platform-specific API contracts
+   - Client-tailored security measures
+
+2. **Mobile Platform Support**
+   - **Android Application**
+     - Kotlin with Jetpack Compose
+     - MVVM Clean Architecture
+     - Offline-first approach
+     - Platform-specific features
+   - **iOS Application**
+     - Swift with SwiftUI
+     - MVVM Clean Architecture
+     - Native integration with Apple services
+     - Consistent user experience with other platforms
+
+3. **Desktop Platform Support**
+   - **Windows Application**
+     - Electron framework
+     - React/TypeScript frontend
+     - Native Windows integration
+     - Offline content access
+   - **macOS Application**
+     - Electron framework
+     - React/TypeScript frontend
+     - Apple Silicon optimization
+     - Integration with macOS features
+
+## Cross-Platform Considerations
+
+The addition of multiple platforms introduces several considerations:
+
+1. **Unified User Experience**
+   - Consistent branding across platforms
+   - Platform-appropriate UI/UX patterns
+   - Feature parity for core functionality
+   - Platform-specific enhancements
+
+2. **Shared Authentication**
+   - Cross-device authentication
+   - Session management across platforms
+   - Secure credential storage for each platform
+   - Biometric integration where applicable
+
+3. **Offline Synchronization**
+   - Conflict resolution strategy
+   - Background sync mechanisms
+   - Bandwidth and battery optimizations
+   - Cross-device data consistency
+
 ## Recent Activities
 
 *   Implemented Clean Architecture structure:

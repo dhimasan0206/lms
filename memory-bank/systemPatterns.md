@@ -607,3 +607,206 @@ Common error codes:
 - `429`: Too Many Requests
 - `500`: Internal Server Error
 - `503`: Service Unavailable 
+
+## BFF and Client Platform Patterns
+
+### BFF (Backend For Frontend) Pattern
+
+```mermaid
+flowchart TD
+    Client1[Web Client] --> WebBFF[Web BFF]
+    Client2[Mobile Client] --> MobileBFF[Mobile BFF]
+    Client3[Desktop Client] --> DesktopBFF[Desktop BFF]
+    
+    WebBFF --> API[API Gateway]
+    MobileBFF --> API
+    DesktopBFF --> API
+    
+    API --> Service1[Auth Service]
+    API --> Service2[Course Service]
+    API --> Service3[User Service]
+    API --> Service4[Content Service]
+```
+
+1. **Key Characteristics**
+   - Purpose-built backends for each frontend client type
+   - Tailored response formats and optimized data transfer
+   - Client-specific API contract and versioning
+   - Coordinated development with client teams
+
+2. **Implementation Approach**
+   - **Aggregation Layer**
+     - Combine multiple backend responses into a single client-optimized response
+     - Reduce network roundtrips for client applications
+     - Optimize payload size for specific client constraints
+   
+   - **Translation Layer**
+     - Transform backend data models to client-friendly formats
+     - Handle backwards compatibility for older client versions
+     - Provide client-specific data enrichment
+
+3. **Client-Specific Optimizations**
+   - **Mobile BFF**
+     - Bandwidth-optimized payloads (reduced JSON, fewer fields)
+     - Battery-aware operation patterns
+     - Push notification integration
+     - Offline-first data strategies
+   
+   - **Web BFF**
+     - SEO-friendly data structures
+     - Progressive enhancement support
+     - Browser compatibility considerations
+     - Single-page application optimizations
+   
+   - **Desktop BFF**
+     - Richer data models for more powerful UIs
+     - Local system integration support
+     - Background processing capabilities
+     - Extended session management
+
+### Mobile Application Architecture Patterns
+
+```mermaid
+flowchart TD
+    subgraph Android App
+        UI[UI Layer: Jetpack Compose]
+        ViewModel[ViewModel Layer]
+        Repository[Repository Layer]
+        LocalStore[Local Storage: Room]
+        API[API Client: Retrofit]
+        
+        UI --> ViewModel
+        ViewModel --> Repository
+        Repository --> LocalStore
+        Repository --> API
+    end
+```
+
+```mermaid
+flowchart TD
+    subgraph iOS App
+        UI[UI Layer: SwiftUI]
+        ViewModel[ViewModel Layer]
+        Repository[Repository Layer]
+        LocalStore[Local Storage: Core Data]
+        API[API Client: URLSession]
+        
+        UI --> ViewModel
+        ViewModel --> Repository
+        Repository --> LocalStore
+        Repository --> API
+    end
+```
+
+1. **Common Patterns**
+   - **Clean Architecture**
+     - Clear separation of UI, domain, and data layers
+     - Use cases orchestrating business logic
+     - Dependency injection for testability
+     - Unidirectional data flow
+   
+   - **Offline-First**
+     - Local database as source of truth
+     - Background synchronization
+     - Conflict resolution strategies
+     - Progressive data loading
+   
+   - **Reactive Programming**
+     - Observable data streams
+     - UI updates based on state changes
+     - Event-driven architecture
+     - Composition of data sources
+
+2. **Platform-Specific Patterns**
+   - **Android**
+     - ViewModel with SavedState
+     - Jetpack Compose composition
+     - WorkManager for background tasks
+     - Navigation Component for routing
+   
+   - **iOS**
+     - SwiftUI state management
+     - Combine data processing
+     - Core Data persistence
+     - Swift concurrency with async/await
+
+### Desktop Application Architecture Patterns
+
+```mermaid
+flowchart TD
+    subgraph Electron App
+        UI[UI Layer: React]
+        State[State Management: Redux]
+        Services[Service Layer]
+        IPC[Electron IPC]
+        Node[Node.js Modules]
+        
+        UI --> State
+        State --> Services
+        Services --> IPC
+        IPC --> Node
+    end
+```
+
+1. **Electron Architecture**
+   - **Multi-Process Model**
+     - Main process for Node.js capabilities
+     - Renderer process for UI rendering
+     - IPC communication between processes
+     - Preload scripts for security
+   
+   - **Web Technologies Integration**
+     - Browser-based UI rendering
+     - Node.js system access
+     - Native module integration
+     - Web and desktop hybrid capabilities
+
+2. **Cross-Platform Considerations**
+   - **Shared Code Strategy**
+     - Core logic in platform-agnostic libraries
+     - Platform adapters for OS-specific features
+     - Feature detection and capability graceful degradation
+     - Consistent state management approach
+   
+   - **Native Integration Points**
+     - File system access patterns
+     - OS notifications integration
+     - Hardware acceleration utilization
+     - System tray and menu integration
+
+### Cross-Platform Feature Implementation
+
+```mermaid
+flowchart TD
+    Feature[Feature Requirement]
+    
+    Feature --> WebImpl[Web Implementation]
+    Feature --> MobileImpl[Mobile Implementation]
+    Feature --> DesktopImpl[Desktop Implementation]
+    
+    WebImpl --> WebBFF[Web BFF]
+    MobileImpl --> MobileBFF[Mobile BFF]
+    DesktopImpl --> DesktopBFF[Desktop BFF]
+    
+    WebBFF --> CoreServices[Core Services]
+    MobileBFF --> CoreServices
+    DesktopBFF --> CoreServices
+```
+
+1. **Feature Consistency Strategy**
+   - Core feature contracts and specifications
+   - Platform-appropriate implementations
+   - Unified testing criteria
+   - Feature flag coordination
+
+2. **Implementation Workflow**
+   - Feature definition and acceptance criteria
+   - Platform-specific design and implementation
+   - BFF adaptation for each platform
+   - Cross-platform testing and validation
+
+3. **Synchronization Patterns**
+   - Offline state sync protocol
+   - Cross-device state management
+   - Conflict resolution algorithms
+   - Real-time collaboration models 

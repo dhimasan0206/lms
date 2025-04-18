@@ -10,93 +10,97 @@ The system will be **web-based**, accessible via modern browsers, with a **respo
 
 ## 2. Key Design Patterns & Principles
 
-*   **Multi-Tenancy:** Core to the system. Mechanisms needed for:
-    *   Tenant Provisioning (creating new organizations)
-    *   Tenant Identification (routing requests to the correct tenant data)
-    *   Data Isolation (preventing data leakage between tenants)
-    *   Tenant Configuration (custom settings/branding per tenant)
-*   **Role-Based Access Control (RBAC):** A robust permission system will control access based on user roles (Org Admin, Branch Manager, Teacher, Student) within their respective tenant and branch context.
-*   **Hierarchical Data Model:** The data structure will reflect the Organization -> Branch -> Class -> User hierarchy.
-*   **Repository Pattern:** To abstract data access logic, allowing for easier changes to the underlying data storage.
-*   **Service Layer:** Business logic will be encapsulated in service layers to separate it from the controllers/API endpoints.
-*   **Asynchronous Processing:** Background jobs (using queues like RabbitMQ or Redis) will handle long-running tasks like report generation, bulk imports, and sending notifications to avoid blocking user requests.
-*   **API-First Design:** Core functionality will be exposed via APIs to support potential future integrations or native mobile applications.
-*   **Event-Driven Architecture (Optional):** For complex interactions between microservices, an event-driven approach could enhance decoupling and resilience.
+- **Multi-Tenancy:** Core to the system. Mechanisms needed for:
+  - Tenant Provisioning (creating new organizations)
+  - Tenant Identification (routing requests to the correct tenant data)
+  - Data Isolation (preventing data leakage between tenants)
+  - Tenant Configuration (custom settings/branding per tenant)
+- **Role-Based Access Control (RBAC):** A robust permission system will control access based on user roles (Org Admin, Branch Manager, Teacher, Student) within their respective tenant and branch context.
+- **Hierarchical Data Model:** The data structure will reflect the Organization -> Branch -> Class -> User hierarchy.
+- **Repository Pattern:** To abstract data access logic, allowing for easier changes to the underlying data storage.
+- **Service Layer:** Business logic will be encapsulated in service layers to separate it from the controllers/API endpoints.
+- **Asynchronous Processing:** Background jobs (using queues like RabbitMQ or Redis) will handle long-running tasks like report generation, bulk imports, and sending notifications to avoid blocking user requests.
+- **API-First Design:** Core functionality will be exposed via APIs to support potential future integrations or native mobile applications.
+- **Event-Driven Architecture (Optional):** For complex interactions between microservices, an event-driven approach could enhance decoupling and resilience.
 
 ## 3. Component Relationships (Conceptual)
 
 ```mermaid
 flowchart TD
-    User[User (Browser/Mobile)] --> LoadBalancer[Load Balancer]
-    LoadBalancer --> API_Gateway[API Gateway / BFF]
+  User[User (Browser/Mobile)] --> LoadBalancer[Load Balancer]
+  LoadBalancer --> API_Gateway[API Gateway / BFF]
 
-    subgraph Backend Services
-        API_Gateway --> AuthN[Auth Service]
-        API_Gateway --> TenantMgmt[Tenant Mgmt Service]
-        API_Gateway --> UserMgmt[User Mgmt Service]
-        API_Gateway --> BranchMgmt[Branch Mgmt Service]
-        API_Gateway --> CourseMgmt[Course Mgmt Service]
-        API_Gateway --> ContentMgmt[Content Service]
-        API_Gateway --> Analytics[Analytics Service]
-        API_Gateway --> Notification[Notification Service]
+  subgraph Backend Services
+    API_Gateway --> AuthN[Auth Service]
+    API_Gateway --> TenantMgmt[Tenant Mgmt Service]
+    API_Gateway --> UserMgmt[User Mgmt Service]
+    API_Gateway --> BranchMgmt[Branch Mgmt Service]
+    API_Gateway --> CourseMgmt[Course Mgmt Service]
+    API_Gateway --> ContentMgmt[Content Service]
+    API_Gateway --> Analytics[Analytics Service]
+    API_Gateway --> Notification[Notification Service]
 
-        UserMgmt --> DB_Users[(User DB)]
-        TenantMgmt --> DB_Tenants[(Tenant Config DB)]
-        BranchMgmt --> DB_Branches[(Branch DB / Tenant DB)]
-        CourseMgmt --> DB_Courses[(Course DB / Tenant DB)]
-        ContentMgmt --> ObjectStorage[(Object Storage)]
-        Analytics --> DataWarehouse[(Data Warehouse)]
-        Notification --> Queue[Message Queue]
+    UserMgmt --> DB_Users[(User DB)]
+    TenantMgmt --> DB_Tenants[(Tenant Config DB)]
+    BranchMgmt --> DB_Branches[(Branch DB / Tenant DB)]
+    CourseMgmt --> DB_Courses[(Course DB / Tenant DB)]
+    ContentMgmt --> ObjectStorage[(Object Storage)]
+    Analytics --> DataWarehouse[(Data Warehouse)]
+    Notification --> Queue[Message Queue]
 
-        %% Tenant Data Stores - could be separate DBs or schemas
-        subgraph Tenant A Data
-            DB_Branches_A[(Branch Data A)]
-            DB_Courses_A[(Course Data A)]
-            %% ... other tenant-specific data
-        end
-        subgraph Tenant B Data
-            DB_Branches_B[(Branch Data B)]
-            DB_Courses_B[(Course Data B)]
-            %% ... other tenant-specific data
-        end
-
-        BranchMgmt --> Tenant A Data
-        CourseMgmt --> Tenant A Data
-        BranchMgmt --> Tenant B Data
-        CourseMgmt --> Tenant B Data
+    %% Tenant Data Stores   * could be separate DBs or schemas
+    subgraph Tenant A Data
+    DB_Branches_A[(Branch Data A)]
+    DB_Courses_A[(Course Data A)]
+    %% ... other tenant-specific data
+    end
+    subgraph Tenant B Data
+    DB_Branches_B[(Branch Data B)]
+    DB_Courses_B[(Course Data B)]
+    %% ... other tenant-specific data
     end
 
-    Notification --> Email[Email Service]
-    Notification --> Push[Push Notification Service]
+    BranchMgmt --> Tenant A Data
+    CourseMgmt --> Tenant A Data
+    BranchMgmt --> Tenant B Data
+    CourseMgmt --> Tenant B Data
+  end
 
-    Analytics --> ReportingUI[Reporting UI]
+  Notification --> Email[Email Service]
+  Notification --> Push[Push Notification Service]
+
+  Analytics --> ReportingUI[Reporting UI]
 ```
-*Note: This is a high-level conceptual diagram. Actual implementation might vary based on chosen multi-tenancy strategy and microservice boundaries.*
+
+_Note: This is a high-level conceptual diagram. Actual implementation might vary based on chosen multi-tenancy strategy and microservice boundaries._
 
 ## 4. Data Management
 
-*   **Database Choice:** A relational database (like PostgreSQL) is suitable for structured data and transactional integrity. A NoSQL database might be used for specific needs like analytics or user session management.
-*   **Data Isolation Strategy:** Requires careful consideration (Separate Databases vs. Shared Database/Schema). This decision impacts cost, complexity, and isolation level.
-*   **Backup & Recovery:** Regular automated backups and a clear disaster recovery plan are essential.
-*   **Data Archiving:** Strategy for archiving old data (e.g., inactive courses, user records) to maintain performance.
+- **Database Choice:** A relational database (like PostgreSQL) is suitable for structured data and transactional integrity. A NoSQL database might be used for specific needs like analytics or user session management.
+- **Data Isolation Strategy:** Requires careful consideration (Separate Databases vs. Shared Database/Schema). This decision impacts cost, complexity, and isolation level.
+- **Backup & Recovery:** Regular automated backups and a clear disaster recovery plan are essential.
+- **Data Archiving:** Strategy for archiving old data (e.g., inactive courses, user records) to maintain performance.
 
 ## Badge and Certificate System Patterns
 
 ### Design Patterns
 
 1. **Observer Pattern**
+
    - Badge progress monitoring
    - Achievement notifications
    - Real-time updates
    - Event tracking
 
 2. **Factory Pattern**
+
    - Badge creation
    - Certificate generation
    - Template management
    - Social media integration
 
 3. **Strategy Pattern**
+
    - Verification methods
    - Progress calculation
    - Sharing strategies
@@ -111,58 +115,66 @@ flowchart TD
 ### Component Relationships
 
 1. **Badge System**
-   ```
-   BadgeDefinition -> BadgeProgress -> EarnedBadge
-        ↓                  ↓              ↓
-   CriteriaCheck <- ProgressTracker <- Achievement
-   ```
+
+```code
+BadgeDefinition -> BadgeProgress -> EarnedBadge
+   ↓      ↓      ↓
+CriteriaCheck <* ProgressTracker <* Achievement
+```
 
 2. **Certificate System**
-   ```
-   CertificateTemplate -> CertificateGenerator -> IssuedCertificate
-           ↓                    ↓                    ↓
-   TemplateFields <- DynamicContent <- VerificationCode
-   ```
+
+```code
+CertificateTemplate -> CertificateGenerator -> IssuedCertificate
+    ↓        ↓        ↓
+TemplateFields <* DynamicContent <* VerificationCode
+```
 
 3. **Social Integration**
-   ```
-   Achievement -> SocialMediaService -> PlatformAdapter
-       ↓               ↓                  ↓
-   ShareContent <- FormatContent <- PlatformSpecific
-   ```
+
+```code
+Achievement -> SocialMediaService -> PlatformAdapter
+  ↓     ↓      ↓
+ShareContent <* FormatContent <* PlatformSpecific
+```
 
 ### Data Flow
 
 1. **Badge Progress**
-   ```
-   User Action -> Progress Update -> Criteria Check -> Badge Award
-       ↓              ↓                ↓              ↓
-   EventEmitter -> Cache Update -> Validation -> Notification
-   ```
+
+```code
+User Action -> Progress Update -> Criteria Check -> Badge Award
+  ↓      ↓      ↓      ↓
+EventEmitter -> Cache Update -> Validation -> Notification
+```
 
 2. **Certificate Generation**
-   ```
-   Completion -> Template Selection -> Content Generation -> PDF Creation
-       ↓              ↓                  ↓                  ↓
-   Validation -> Field Mapping -> Dynamic Data -> Digital Sign
-   ```
+
+```code
+Completion -> Template Selection -> Content Generation -> PDF Creation
+  ↓      ↓      ↓      ↓
+Validation -> Field Mapping -> Dynamic Data -> Digital Sign
+```
 
 3. **Verification Flow**
-   ```
-   Request -> Code Validation -> Certificate Check -> Response
-       ↓            ↓              ↓                ↓
-   RateLimit -> Cache Check -> Blockchain Verify -> Logging
-   ```
+
+```code
+Request -> Code Validation -> Certificate Check -> Response
+  ↓    ↓      ↓      ↓
+RateLimit -> Cache Check -> Blockchain Verify -> Logging
+```
 
 ### Integration Patterns
 
 1. **Event-Driven**
+
    - Progress updates
    - Achievement notifications
    - Verification requests
    - Social sharing
 
 2. **API-First**
+
    - RESTful endpoints
    - GraphQL queries
    - WebSocket updates
@@ -172,13 +184,14 @@ flowchart TD
    - Redis for progress
    - CDN for certificates
    - Memory cache for templates
-   - Distributed caching 
+   - Distributed caching
 
 ## API Architecture Patterns
 
 ### API Design Principles
 
 1. **RESTful Architecture**
+
    - Resource-oriented endpoints
    - Stateless communication
    - HTTP method semantics
@@ -186,6 +199,7 @@ flowchart TD
    - HATEOAS principles
 
 2. **API Gateway Pattern**
+
    - Request routing
    - Load balancing
    - Rate limiting
@@ -193,6 +207,7 @@ flowchart TD
    - Request/Response transformation
 
 3. **Versioning Strategy**
+
    - URL path versioning
    - Backward compatibility
    - Version deprecation policy
@@ -209,65 +224,68 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Client[Client Applications] --> Gateway[API Gateway]
-    
-    subgraph API Layer
-        Gateway --> Auth[Authentication]
-        Gateway --> RBAC[Authorization]
-        Gateway --> RateLimit[Rate Limiting]
-        
-        Auth --> Services[Microservices]
-        RBAC --> Services
-        RateLimit --> Services
-    end
-    
-    subgraph Service Layer
-        Services --> UserService[User Service]
-        Services --> CourseService[Course Service]
-        Services --> ContentService[Content Service]
-        Services --> AnalyticsService[Analytics Service]
-    end
+  Client[Client Applications] --> Gateway[API Gateway]
+
+  subgraph API Layer
+    Gateway --> Auth[Authentication]
+    Gateway --> RBAC[Authorization]
+    Gateway --> RateLimit[Rate Limiting]
+
+    Auth --> Services[Microservices]
+    RBAC --> Services
+    RateLimit --> Services
+  end
+
+  subgraph Service Layer
+    Services --> UserService[User Service]
+    Services --> CourseService[Course Service]
+    Services --> ContentService[Content Service]
+    Services --> AnalyticsService[Analytics Service]
+  end
 ```
 
 ### API Resource Hierarchy
 
-```
+```code
 /api/v1/
-├── auth/                 # Authentication endpoints
-├── organizations/        # Organization management
-│   └── {orgId}/
-│       ├── branches/     # Branch management
-│       ├── users/        # User management
-│       └── settings/     # Organization settings
-├── courses/             # Course management
-│   └── {courseId}/
-│       ├── content/     # Course content
-│       ├── enrollments/ # Course enrollments
-│       └── analytics/   # Course analytics
-├── content/             # Content management
-├── assessments/         # Assessment management
-├── badges/             # Badge management
-├── certificates/        # Certificate management
-├── analytics/          # Analytics endpoints
-├── notifications/      # Notification management
-└── integrations/       # Integration endpoints
+├── auth/       # Authentication endpoints
+├── organizations/    # Organization management
+│ └── {orgId}/
+│   ├── branches/   # Branch management
+│   ├── users/    # User management
+│   └── settings/   # Organization settings
+├── courses/     # Course management
+│ └── {courseId}/
+│   ├── content/   # Course content
+│   ├── enrollments/ # Course enrollments
+│   └── analytics/ # Course analytics
+├── content/     # Content management
+├── assessments/   # Assessment management
+├── badges/     # Badge management
+├── certificates/    # Certificate management
+├── analytics/    # Analytics endpoints
+├── notifications/  # Notification management
+└── integrations/   # Integration endpoints
 ```
 
 ### API Design Patterns
 
 1. **Repository Pattern**
+
    - Data access abstraction
    - Consistent data operations
    - Query optimization
    - Cache integration
 
 2. **Service Layer Pattern**
+
    - Business logic encapsulation
    - Transaction management
    - Cross-cutting concerns
    - Service composition
 
 3. **DTO Pattern**
+
    - Data transfer objects
    - Request/Response mapping
    - Validation
@@ -282,18 +300,21 @@ flowchart TD
 ### API Integration Patterns
 
 1. **Event-Driven Integration**
+
    - Message queues
    - Pub/Sub systems
    - Event sourcing
    - Async communication
 
 2. **Synchronous Integration**
+
    - REST APIs
    - GraphQL
    - gRPC
    - WebSocket
 
 3. **Caching Patterns**
+
    - Response caching
    - Distributed caching
    - Cache invalidation
@@ -308,18 +329,21 @@ flowchart TD
 ### API Security Patterns
 
 1. **Authentication Patterns**
+
    - JWT-based auth
    - OAuth2 flows
    - API key management
    - Session management
 
 2. **Authorization Patterns**
+
    - Role-based access
    - Resource-based access
    - Permission management
    - Policy enforcement
 
 3. **Data Protection Patterns**
+
    - Encryption at rest
    - Encryption in transit
    - Data masking
@@ -598,6 +622,7 @@ Error responses follow a consistent format:
 ### Error Codes
 
 Common error codes:
+
 - `400`: Bad Request
 - `401`: Unauthorized
 - `403`: Forbidden
@@ -606,7 +631,7 @@ Common error codes:
 - `422`: Unprocessable Entity
 - `429`: Too Many Requests
 - `500`: Internal Server Error
-- `503`: Service Unavailable 
+- `503`: Service Unavailable
 
 ## BFF and Client Platform Patterns
 
@@ -614,50 +639,56 @@ Common error codes:
 
 ```mermaid
 flowchart TD
-    Client1[Web Client] --> WebBFF[Web BFF]
-    Client2[Mobile Client] --> MobileBFF[Mobile BFF]
-    Client3[Desktop Client] --> DesktopBFF[Desktop BFF]
-    
-    WebBFF --> API[API Gateway]
-    MobileBFF --> API
-    DesktopBFF --> API
-    
-    API --> Service1[Auth Service]
-    API --> Service2[Course Service]
-    API --> Service3[User Service]
-    API --> Service4[Content Service]
+  Client1[Web Client] --> WebBFF[Web BFF]
+  Client2[Mobile Client] --> MobileBFF[Mobile BFF]
+  Client3[Desktop Client] --> DesktopBFF[Desktop BFF]
+
+  WebBFF --> API[API Gateway]
+  MobileBFF --> API
+  DesktopBFF --> API
+
+  API --> Service1[Auth Service]
+  API --> Service2[Course Service]
+  API --> Service3[User Service]
+  API --> Service4[Content Service]
 ```
 
 1. **Key Characteristics**
+
    - Purpose-built backends for each frontend client type
    - Tailored response formats and optimized data transfer
    - Client-specific API contract and versioning
    - Coordinated development with client teams
 
 2. **Implementation Approach**
+
    - **Aggregation Layer**
+
      - Combine multiple backend responses into a single client-optimized response
      - Reduce network roundtrips for client applications
      - Optimize payload size for specific client constraints
-   
+
    - **Translation Layer**
      - Transform backend data models to client-friendly formats
      - Handle backwards compatibility for older client versions
      - Provide client-specific data enrichment
 
 3. **Client-Specific Optimizations**
+
    - **Mobile BFF**
+
      - Bandwidth-optimized payloads (reduced JSON, fewer fields)
      - Battery-aware operation patterns
      - Push notification integration
      - Offline-first data strategies
-   
+
    - **Web BFF**
+
      - SEO-friendly data structures
      - Progressive enhancement support
      - Browser compatibility considerations
      - Single-page application optimizations
-   
+
    - **Desktop BFF**
      - Richer data models for more powerful UIs
      - Local system integration support
@@ -668,49 +699,52 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Android App
-        UI[UI Layer: Jetpack Compose]
-        ViewModel[ViewModel Layer]
-        Repository[Repository Layer]
-        LocalStore[Local Storage: Room]
-        API[API Client: Retrofit]
-        
-        UI --> ViewModel
-        ViewModel --> Repository
-        Repository --> LocalStore
-        Repository --> API
-    end
+  subgraph Android App
+    UI[UI Layer: Jetpack Compose]
+    ViewModel[ViewModel Layer]
+    Repository[Repository Layer]
+    LocalStore[Local Storage: Room]
+    API[API Client: Retrofit]
+
+    UI --> ViewModel
+    ViewModel --> Repository
+    Repository --> LocalStore
+    Repository --> API
+  end
 ```
 
 ```mermaid
 flowchart TD
-    subgraph iOS App
-        UI[UI Layer: SwiftUI]
-        ViewModel[ViewModel Layer]
-        Repository[Repository Layer]
-        LocalStore[Local Storage: Core Data]
-        API[API Client: URLSession]
-        
-        UI --> ViewModel
-        ViewModel --> Repository
-        Repository --> LocalStore
-        Repository --> API
-    end
+  subgraph iOS App
+    UI[UI Layer: SwiftUI]
+    ViewModel[ViewModel Layer]
+    Repository[Repository Layer]
+    LocalStore[Local Storage: Core Data]
+    API[API Client: URLSession]
+
+    UI --> ViewModel
+    ViewModel --> Repository
+    Repository --> LocalStore
+    Repository --> API
+  end
 ```
 
 1. **Common Patterns**
+
    - **Clean Architecture**
+
      - Clear separation of UI, domain, and data layers
      - Use cases orchestrating business logic
      - Dependency injection for testability
      - Unidirectional data flow
-   
+
    - **Offline-First**
+
      - Local database as source of truth
      - Background synchronization
      - Conflict resolution strategies
      - Progressive data loading
-   
+
    - **Reactive Programming**
      - Observable data streams
      - UI updates based on state changes
@@ -718,12 +752,14 @@ flowchart TD
      - Composition of data sources
 
 2. **Platform-Specific Patterns**
+
    - **Android**
+
      - ViewModel with SavedState
      - Jetpack Compose composition
      - WorkManager for background tasks
      - Navigation Component for routing
-   
+
    - **iOS**
      - SwiftUI state management
      - Combine data processing
@@ -734,27 +770,29 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Electron App
-        UI[UI Layer: React]
-        State[State Management: Redux]
-        Services[Service Layer]
-        IPC[Electron IPC]
-        Node[Node.js Modules]
-        
-        UI --> State
-        State --> Services
-        Services --> IPC
-        IPC --> Node
-    end
+  subgraph Electron App
+    UI[UI Layer: React]
+    State[State Management: Redux]
+    Services[Service Layer]
+    IPC[Electron IPC]
+    Node[Node.js Modules]
+
+    UI --> State
+    State --> Services
+    Services --> IPC
+    IPC --> Node
+  end
 ```
 
 1. **Electron Architecture**
+
    - **Multi-Process Model**
+
      - Main process for Node.js capabilities
      - Renderer process for UI rendering
      - IPC communication between processes
      - Preload scripts for security
-   
+
    - **Web Technologies Integration**
      - Browser-based UI rendering
      - Node.js system access
@@ -762,12 +800,14 @@ flowchart TD
      - Web and desktop hybrid capabilities
 
 2. **Cross-Platform Considerations**
+
    - **Shared Code Strategy**
+
      - Core logic in platform-agnostic libraries
      - Platform adapters for OS-specific features
      - Feature detection and capability graceful degradation
      - Consistent state management approach
-   
+
    - **Native Integration Points**
      - File system access patterns
      - OS notifications integration
@@ -778,28 +818,30 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    Feature[Feature Requirement]
-    
-    Feature --> WebImpl[Web Implementation]
-    Feature --> MobileImpl[Mobile Implementation]
-    Feature --> DesktopImpl[Desktop Implementation]
-    
-    WebImpl --> WebBFF[Web BFF]
-    MobileImpl --> MobileBFF[Mobile BFF]
-    DesktopImpl --> DesktopBFF[Desktop BFF]
-    
-    WebBFF --> CoreServices[Core Services]
-    MobileBFF --> CoreServices
-    DesktopBFF --> CoreServices
+  Feature[Feature Requirement]
+
+  Feature --> WebImpl[Web Implementation]
+  Feature --> MobileImpl[Mobile Implementation]
+  Feature --> DesktopImpl[Desktop Implementation]
+
+  WebImpl --> WebBFF[Web BFF]
+  MobileImpl --> MobileBFF[Mobile BFF]
+  DesktopImpl --> DesktopBFF[Desktop BFF]
+
+  WebBFF --> CoreServices[Core Services]
+  MobileBFF --> CoreServices
+  DesktopBFF --> CoreServices
 ```
 
 1. **Feature Consistency Strategy**
+
    - Core feature contracts and specifications
    - Platform-appropriate implementations
    - Unified testing criteria
    - Feature flag coordination
 
 2. **Implementation Workflow**
+
    - Feature definition and acceptance criteria
    - Platform-specific design and implementation
    - BFF adaptation for each platform
@@ -809,4 +851,4 @@ flowchart TD
    - Offline state sync protocol
    - Cross-device state management
    - Conflict resolution algorithms
-   - Real-time collaboration models 
+   - Real-time collaboration models

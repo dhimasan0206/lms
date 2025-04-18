@@ -43,6 +43,7 @@ This directory contains the technical documentation for the Learning Management 
 ## Technology Stack
 
 1. **Frontend**
+
    - Next.js with React
    - TypeScript
    - Tailwind CSS
@@ -50,12 +51,14 @@ This directory contains the technical documentation for the Learning Management 
    - Zustand
 
 2. **Backend**
+
    - Python with FastAPI
    - Microservices architecture
    - OpenTelemetry integration
    - AI capabilities
 
 3. **Databases**
+
    - PostgreSQL (Primary)
    - MongoDB (Content)
    - Pinecone (Vector)
@@ -71,18 +74,21 @@ This directory contains the technical documentation for the Learning Management 
 ## Development Guidelines
 
 1. **Code Standards**
+
    - TypeScript/Python style guides
    - Documentation requirements
    - Code review process
    - Version control workflow
 
 2. **Testing Strategy**
+
    - Unit testing
    - Integration testing
    - Performance testing
    - Security testing
 
 3. **Security Practices**
+
    - Authentication flows
    - Authorization rules
    - Data protection
@@ -96,4 +102,4 @@ This directory contains the technical documentation for the Learning Management 
 
 ## Technical Implementation Status
 
-See individual technical documentation for current implementation status and details. 
+See individual technical documentation for current implementation status and details.

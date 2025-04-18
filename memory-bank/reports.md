@@ -74,31 +74,37 @@ CREATE TABLE report_access_logs (
         "grade_level": "String",
         "enrollment_date": "Date"
       },
-      "course_progress": [{
-        "course_name": "String",
-        "progress_percentage": "Number",
-        "current_grade": "Number",
-        "completed_modules": "Number",
-        "total_modules": "Number",
-        "last_activity": "Date"
-      }],
-      "assessments": [{
-        "title": "String",
-        "type": "String",
-        "score": "Number",
-        "completion_date": "Date",
-        "feedback": "String"
-      }],
+      "course_progress": [
+        {
+          "course_name": "String",
+          "progress_percentage": "Number",
+          "current_grade": "Number",
+          "completed_modules": "Number",
+          "total_modules": "Number",
+          "last_activity": "Date"
+        }
+      ],
+      "assessments": [
+        {
+          "title": "String",
+          "type": "String",
+          "score": "Number",
+          "completion_date": "Date",
+          "feedback": "String"
+        }
+      ],
       "attendance": {
         "total_sessions": "Number",
         "attended_sessions": "Number",
         "attendance_rate": "Number"
       },
-      "learning_objectives": [{
-        "objective": "String",
-        "status": "String",
-        "mastery_level": "String"
-      }]
+      "learning_objectives": [
+        {
+          "objective": "String",
+          "status": "String",
+          "mastery_level": "String"
+        }
+      ]
     }
   }
 }
@@ -112,35 +118,45 @@ CREATE TABLE report_access_logs (
     "type": "parent",
     "frequency": "weekly",
     "data": {
-      "children": [{
-        "student_name": "String",
-        "student_id": "UUID",
-        "overall_performance": {
-          "gpa": "Number",
-          "attendance_rate": "Number",
-          "courses_enrolled": "Number"
-        },
-        "course_summaries": [{
-          "course_name": "String",
-          "current_grade": "Number",
-          "progress": "Number",
-          "recent_assessments": [{
-            "title": "String",
-            "score": "Number",
-            "date": "Date"
-          }]
-        }],
-        "upcoming_deadlines": [{
-          "course": "String",
-          "assignment": "String",
-          "due_date": "Date"
-        }],
-        "teacher_comments": [{
-          "course": "String",
-          "comment": "String",
-          "date": "Date"
-        }]
-      }]
+      "children": [
+        {
+          "student_name": "String",
+          "student_id": "UUID",
+          "overall_performance": {
+            "gpa": "Number",
+            "attendance_rate": "Number",
+            "courses_enrolled": "Number"
+          },
+          "course_summaries": [
+            {
+              "course_name": "String",
+              "current_grade": "Number",
+              "progress": "Number",
+              "recent_assessments": [
+                {
+                  "title": "String",
+                  "score": "Number",
+                  "date": "Date"
+                }
+              ]
+            }
+          ],
+          "upcoming_deadlines": [
+            {
+              "course": "String",
+              "assignment": "String",
+              "due_date": "Date"
+            }
+          ],
+          "teacher_comments": [
+            {
+              "course": "String",
+              "comment": "String",
+              "date": "Date"
+            }
+          ]
+        }
+      ]
     }
   }
 }
@@ -171,24 +187,30 @@ CREATE TABLE report_access_logs (
         "completion_rate": "Number",
         "engagement_rate": "Number"
       },
-      "student_performance": [{
-        "student_name": "String",
-        "current_grade": "Number",
-        "attendance_rate": "Number",
-        "completed_assignments": "Number",
-        "participation_score": "Number"
-      }],
-      "module_analytics": [{
-        "module_name": "String",
-        "completion_rate": "Number",
-        "average_score": "Number",
-        "time_spent": "Number"
-      }],
-      "at_risk_students": [{
-        "student_name": "String",
-        "risk_factors": ["String"],
-        "last_activity": "Date"
-      }]
+      "student_performance": [
+        {
+          "student_name": "String",
+          "current_grade": "Number",
+          "attendance_rate": "Number",
+          "completed_assignments": "Number",
+          "participation_score": "Number"
+        }
+      ],
+      "module_analytics": [
+        {
+          "module_name": "String",
+          "completion_rate": "Number",
+          "average_score": "Number",
+          "time_spent": "Number"
+        }
+      ],
+      "at_risk_students": [
+        {
+          "student_name": "String",
+          "risk_factors": ["String"],
+          "last_activity": "Date"
+        }
+      ]
     }
   }
 }
@@ -219,19 +241,23 @@ CREATE TABLE report_access_logs (
         "course_completion_rate": "Number",
         "student_satisfaction": "Number"
       },
-      "course_analytics": [{
-        "course_name": "String",
-        "enrollment_count": "Number",
-        "average_grade": "Number",
-        "completion_rate": "Number",
-        "instructor_name": "String"
-      }],
-      "instructor_performance": [{
-        "instructor_name": "String",
-        "courses_taught": "Number",
-        "average_student_rating": "Number",
-        "student_success_rate": "Number"
-      }],
+      "course_analytics": [
+        {
+          "course_name": "String",
+          "enrollment_count": "Number",
+          "average_grade": "Number",
+          "completion_rate": "Number",
+          "instructor_name": "String"
+        }
+      ],
+      "instructor_performance": [
+        {
+          "instructor_name": "String",
+          "courses_taught": "Number",
+          "average_student_rating": "Number",
+          "student_success_rate": "Number"
+        }
+      ],
       "financial_metrics": {
         "revenue": "Number",
         "expenses": "Number",
@@ -273,13 +299,15 @@ CREATE TABLE report_access_logs (
           "growth_rate": "Number"
         }
       },
-      "branch_performance": [{
-        "branch_name": "String",
-        "total_students": "Number",
-        "revenue": "Number",
-        "student_satisfaction": "Number",
-        "completion_rate": "Number"
-      }],
+      "branch_performance": [
+        {
+          "branch_name": "String",
+          "total_students": "Number",
+          "revenue": "Number",
+          "student_satisfaction": "Number",
+          "completion_rate": "Number"
+        }
+      ],
       "financial_summary": {
         "total_revenue": "Number",
         "total_expenses": "Number",
@@ -291,12 +319,14 @@ CREATE TABLE report_access_logs (
         "average_satisfaction_score": "Number",
         "student_retention_rate": "Number"
       },
-      "top_performing_courses": [{
-        "course_name": "String",
-        "enrollment_count": "Number",
-        "satisfaction_score": "Number",
-        "revenue": "Number"
-      }]
+      "top_performing_courses": [
+        {
+          "course_name": "String",
+          "enrollment_count": "Number",
+          "satisfaction_score": "Number",
+          "revenue": "Number"
+        }
+      ]
     }
   }
 }
@@ -313,16 +343,16 @@ async def generate_report(report_definition_id: UUID, context: Dict):
     """
     # 1. Load report definition
     report_def = await get_report_definition(report_definition_id)
-    
+
     # 2. Gather data based on report type
     data = await gather_report_data(report_def, context)
-    
+
     # 3. Apply templates and formatting
     formatted_report = await format_report(report_def, data)
-    
+
     # 4. Generate file in specified format
     file_url = await create_report_file(formatted_report, report_def.format)
-    
+
     # 5. Save generated report
     report = await save_generated_report(
         report_definition_id=report_definition_id,
@@ -330,10 +360,10 @@ async def generate_report(report_definition_id: UUID, context: Dict):
         file_url=file_url,
         **context
     )
-    
+
     # 6. Log report generation
     await log_report_access(report.id, context['user_id'], 'generate')
-    
+
     return report
 ```
 
@@ -346,10 +376,10 @@ async def check_report_access(user_id: UUID, report_id: UUID):
     """
     # Get report details
     report = await get_generated_report(report_id)
-    
+
     # Get user's roles and permissions
     user_roles = await get_user_roles(user_id)
-    
+
     # Check access based on report type and user roles
     if report.type == 'student':
         # Students can only access their own reports
@@ -366,7 +396,7 @@ async def check_report_access(user_id: UUID, report_id: UUID):
     elif report.type == 'organization':
         # Organization managers can access org reports
         return await is_organization_manager(user_id, report.organization_id)
-    
+
     return False
 ```
 
@@ -379,7 +409,7 @@ async def distribute_report(report_id: UUID, recipients: List[Dict]):
     """
     # Get report details
     report = await get_generated_report(report_id)
-    
+
     for recipient in recipients:
         # Check recipient access
         if await check_report_access(recipient['user_id'], report_id):
@@ -389,7 +419,7 @@ async def distribute_report(report_id: UUID, recipients: List[Dict]):
                 report_id=report_id,
                 notification_type=recipient.get('notification_type', 'email')
             )
-            
+
             # Log access
             await log_report_access(
                 report_id=report_id,
@@ -417,16 +447,16 @@ async def schedule_report(
         recipients=recipients,
         settings=settings
     )
-    
+
     # Calculate next run time
     next_run = calculate_next_run(frequency)
-    
+
     # Update schedule
     await update_report_schedule(
         schedule_id=schedule.id,
         next_run=next_run
     )
-    
+
     return schedule
 ```
 
@@ -476,4 +506,4 @@ await distribute_report(
         {'user_id': org_admin_id, 'notification_type': 'dashboard'}
     ]
 )
-``` 
+```

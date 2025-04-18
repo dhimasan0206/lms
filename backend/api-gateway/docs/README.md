@@ -1,11 +1,12 @@
 # API Gateway Documentation
 
 ## Overview
+
 The API Gateway is a crucial component of the Learning Management System (LMS) that serves as the single entry point for all client requests. It handles request routing, service discovery, load balancing, and request/response transformation.
 
 ## Documentation Structure
 
-```
+```code
 docs/
 ├── README.md                 # This file
 ├── architecture/            # Architecture documentation
@@ -76,4 +77,4 @@ Please refer to the [development setup guide](development/setup.md) for informat
 
 ## License
 
-This service is part of the LMS project and is subject to the project's license terms. 
+This service is part of the LMS project and is subject to the project's license terms.

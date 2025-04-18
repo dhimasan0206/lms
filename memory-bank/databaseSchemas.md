@@ -599,13 +599,13 @@ db.student_performance.createIndex({ "parentAccess.enabled": 1 });
 
 | Role | Scope | Description | Can Do | Cannot Do |
 |------|-------|-------------|--------|-----------|
-| **Owner** | Organization | Full control over the organization | - Create/edit/delete organizations<br>- Manage all branches<br>- Assign all roles<br>- Access all data<br>- Configure system settings<br>- Manage billing | - Cannot be restricted by other roles |
-| **Admin** | Organization/Branch | Administrative control | - Manage users<br>- Create/edit courses<br>- View analytics<br>- Manage content<br>- Configure branch settings | - Cannot delete organization<br>- Cannot manage billing<br>- Cannot assign owner role |
-| **Instructor** | Course | Teaching role | - Create/edit course content<br>- Grade assignments<br>- View student progress<br>- Create assessments<br>- Provide feedback | - Cannot manage users<br>- Cannot access other instructors' courses<br>- Cannot modify system settings |
-| **Student** | Course | Learning role | - Access enrolled courses<br>- Submit assignments<br>- Take assessments<br>- View own progress<br>- Participate in discussions | - Cannot create courses<br>- Cannot grade assignments<br>- Cannot access other students' data |
-| **Parent** | Student | Monitoring role | - View children's progress<br>- Receive notifications<br>- Access progress reports<br>- Communicate with instructors | - Cannot access course content<br>- Cannot submit assignments<br>- Cannot modify grades |
-| **Assistant** | Course | Support role | - Help with course management<br>- Grade assignments<br>- Provide feedback<br>- Moderate discussions | - Cannot create new courses<br>- Cannot modify course structure<br>- Cannot access student personal data |
-| **Auditor** | Course | Read-only role | - View course content<br>- Access materials<br>- Participate in discussions | - Cannot submit assignments<br>- Cannot receive grades<br>- Cannot access student data |
+| **Owner** | Organization | Full control over the organization | - Create/edit/delete organizations - Manage all branches - Assign all roles - Access all data - Configure system settings - Manage billing | - Cannot be restricted by other roles |
+| **Admin** | Organization/Branch | Administrative control | - Manage users - Create/edit courses - View analytics - Manage content - Configure branch settings | - Cannot delete organization - Cannot manage billing - Cannot assign owner role |
+| **Instructor** | Course | Teaching role | - Create/edit course content - Grade assignments - View student progress - Create assessments - Provide feedback | - Cannot manage users - Cannot access other instructors' courses - Cannot modify system settings |
+| **Student** | Course | Learning role | - Access enrolled courses - Submit assignments - Take assessments - View own progress - Participate in discussions | - Cannot create courses - Cannot grade assignments - Cannot access other students' data |
+| **Parent** | Student | Monitoring role | - View children's progress - Receive notifications - Access progress reports - Communicate with instructors | - Cannot access course content - Cannot submit assignments - Cannot modify grades |
+| **Assistant** | Course | Support role | - Help with course management - Grade assignments - Provide feedback - Moderate discussions | - Cannot create new courses - Cannot modify course structure - Cannot access student personal data |
+| **Auditor** | Course | Read-only role | - View course content - Access materials - Participate in discussions | - Cannot submit assignments - Cannot receive grades - Cannot access student data |
 
 ### Permission Definitions
 
@@ -642,6 +642,7 @@ db.student_performance.createIndex({ "parentAccess.enabled": 1 });
 ### Role-Permission Examples
 
 #### Organization Owner
+
 ```json
 {
   "permissions": [
@@ -659,6 +660,7 @@ db.student_performance.createIndex({ "parentAccess.enabled": 1 });
 ```
 
 #### Organization Admin
+
 ```json
 {
   "permissions": [
@@ -675,6 +677,7 @@ db.student_performance.createIndex({ "parentAccess.enabled": 1 });
 ```
 
 #### Branch Admin
+
 ```json
 {
   "permissions": [
@@ -690,6 +693,7 @@ db.student_performance.createIndex({ "parentAccess.enabled": 1 });
 ```
 
 #### Instructor
+
 ```json
 {
   "permissions": [
@@ -712,6 +716,7 @@ db.student_performance.createIndex({ "parentAccess.enabled": 1 });
 ```
 
 #### Student
+
 ```json
 {
   "permissions": [
@@ -724,6 +729,7 @@ db.student_performance.createIndex({ "parentAccess.enabled": 1 });
 ```
 
 #### Parent
+
 ```json
 {
   "permissions": [
@@ -793,6 +799,7 @@ async def get_course_students(
 ### Role Assignment Examples
 
 #### Assigning a user as an instructor in an organization
+
 ```sql
 INSERT INTO user_organizations (
     user_id,
@@ -808,6 +815,7 @@ INSERT INTO user_organizations (
 ```
 
 #### Assigning a user as a student in a specific course
+
 ```sql
 INSERT INTO course_enrollments (
     course_id,
@@ -823,6 +831,7 @@ INSERT INTO course_enrollments (
 ```
 
 #### Linking a parent to a student
+
 ```sql
 INSERT INTO parent_student_relationships (
     parent_id,
@@ -1075,4 +1084,4 @@ CREATE INDEX idx_course_reviews_status ON course_reviews(status);
 CREATE INDEX idx_instructor_reviews_instructor_id ON instructor_reviews(instructor_id);
 CREATE INDEX idx_instructor_reviews_student_id ON instructor_reviews(student_id);
 CREATE INDEX idx_instructor_reviews_status ON instructor_reviews(status);
-CREATE INDEX idx_review_flags_review_id ON review_flags(review_id); 
+CREATE INDEX idx_review_flags_review_id ON review_flags(review_id);

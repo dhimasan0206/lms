@@ -3,6 +3,7 @@
 ## Core Technologies
 
 ### 1. Next.js with React
+
 - **Version**: 14.x
 - **Purpose**: Server-side rendering, routing, and API routes
 - **Key Features**:
@@ -14,6 +15,7 @@
   - Script Optimization
 
 ### 2. TypeScript
+
 - **Version**: 5.x
 - **Purpose**: Type safety and developer experience
 - **Configuration**:
@@ -23,6 +25,7 @@
   - ESLint integration
 
 ### 3. Tailwind CSS
+
 - **Version**: 3.x
 - **Purpose**: Utility-first CSS framework
 - **Configuration**:
@@ -32,7 +35,9 @@
   - Custom plugins
 
 ### 4. State Management
+
 - **Zustand**
+
   - Global state management
   - Simple and lightweight
   - TypeScript support
@@ -45,7 +50,9 @@
   - Optimistic updates
 
 ### 5. Form Management
+
 - **React Hook Form**
+
   - Form state management
   - Validation
   - Performance optimized
@@ -60,6 +67,7 @@
 ## Development Tools
 
 ### 1. Build Tools
+
 - **Vite**
   - Development server
   - Hot Module Replacement
@@ -67,13 +75,16 @@
   - Plugin system
 
 ### 2. Testing
+
 - **Jest**
+
   - Unit testing
   - Component testing
   - Snapshot testing
   - Coverage reporting
 
 - **React Testing Library**
+
   - Component testing
   - Accessibility testing
   - User interaction testing
@@ -86,7 +97,9 @@
   - Performance testing
 
 ### 3. Code Quality
+
 - **ESLint**
+
   - Code linting
   - Style enforcement
   - Best practices
@@ -99,7 +112,9 @@
   - Editor integration
 
 ### 4. Documentation
+
 - **Storybook**
+
   - Component documentation
   - Interactive examples
   - Visual testing
@@ -114,18 +129,21 @@
 ## Performance Optimization
 
 ### 1. Code Splitting
+
 - Dynamic imports
 - Route-based splitting
 - Component lazy loading
 - Bundle analysis
 
 ### 2. Caching
+
 - Service Worker
 - Browser caching
 - API response caching
 - Static generation
 
 ### 3. Asset Optimization
+
 - Image optimization
 - Font optimization
 - CSS optimization
@@ -134,18 +152,21 @@
 ## Development Workflow
 
 ### 1. Version Control
+
 - Git workflow
 - Branch strategy
 - Commit conventions
 - PR templates
 
 ### 2. CI/CD
+
 - GitHub Actions
 - Automated testing
 - Build automation
 - Deployment automation
 
 ### 3. Development Environment
+
 - VS Code configuration
 - Extensions
 - Debugging setup
@@ -154,6 +175,7 @@
 ## Dependencies
 
 ### 1. Core Dependencies
+
 ```json
 {
   "dependencies": {
@@ -171,6 +193,7 @@
 ```
 
 ### 2. Development Dependencies
+
 ```json
 {
   "devDependencies": {
@@ -188,25 +211,29 @@
 ## Best Practices
 
 ### 1. Code Organization
+
 - Feature-based structure
 - Component composition
 - Custom hooks
 - Utility functions
 
 ### 2. Performance
+
 - Memoization
 - Code splitting
 - Asset optimization
 - Bundle size monitoring
 
 ### 3. Accessibility
+
 - ARIA labels
 - Keyboard navigation
 - Screen reader support
 - Color contrast
 
 ### 4. Security
+
 - XSS prevention
 - CSRF protection
 - Content Security Policy
-- Secure headers 
+- Secure headers

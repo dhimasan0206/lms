@@ -12,18 +12,18 @@ graph TD
     Layout --> Header[Header]
     Layout --> Sidebar[Sidebar]
     Layout --> Main[Main Content]
-    
+
     Main --> Pages[Pages]
     Pages --> Auth[Auth Pages]
     Pages --> Dashboard[Dashboard]
     Pages --> Courses[Courses]
     Pages --> Profile[Profile]
-    
+
     Dashboard --> Widgets[Widgets]
     Courses --> CourseList[Course List]
     Courses --> CourseDetail[Course Detail]
     Courses --> Lesson[Lesson View]
-    
+
     Shared[Shared Components] --> UI[UI Components]
     Shared --> Forms[Form Components]
     Shared --> Modals[Modal Components]
@@ -35,12 +35,14 @@ graph TD
 ### 1. Layout Components
 
 1. **MainLayout**
+
    - Responsive layout wrapper
    - Navigation structure
    - Theme provider
    - Error boundaries
 
 2. **Header**
+
    - Navigation menu
    - User menu
    - Search bar
@@ -55,18 +57,21 @@ graph TD
 ### 2. Page Components
 
 1. **Authentication Pages**
+
    - Login
    - Registration
    - Password reset
    - Email verification
 
 2. **Dashboard**
+
    - Overview widgets
    - Progress tracking
    - Recent activity
    - Quick actions
 
 3. **Course Pages**
+
    - Course listing
    - Course details
    - Lesson viewer
@@ -81,6 +86,7 @@ graph TD
 ### 3. Shared Components
 
 1. **UI Components**
+
    - Buttons
    - Cards
    - Tables
@@ -89,6 +95,7 @@ graph TD
    - Loaders
 
 2. **Form Components**
+
    - Input fields
    - Select dropdowns
    - Checkboxes
@@ -97,6 +104,7 @@ graph TD
    - Rich text editor
 
 3. **Modal Components**
+
    - Dialog boxes
    - Confirmation modals
    - Form modals
@@ -111,12 +119,14 @@ graph TD
 ## State Management
 
 1. **Global State**
+
    - User authentication
    - Theme preferences
    - Application settings
    - Notifications
 
 2. **Local State**
+
    - Form data
    - UI state
    - Component-specific data
@@ -131,6 +141,7 @@ graph TD
 ## Routing
 
 1. **Route Structure**
+
    - Public routes
    - Protected routes
    - Dynamic routes
@@ -145,12 +156,14 @@ graph TD
 ## Performance Optimization
 
 1. **Code Splitting**
+
    - Route-based splitting
    - Component lazy loading
    - Dynamic imports
    - Bundle optimization
 
 2. **Caching**
+
    - API response caching
    - Static page generation
    - Image optimization
@@ -165,12 +178,14 @@ graph TD
 ## Styling
 
 1. **Theme System**
+
    - Color palette
    - Typography
    - Spacing
    - Breakpoints
 
 2. **Component Styles**
+
    - Tailwind CSS
    - CSS Modules
    - Styled Components
@@ -185,12 +200,14 @@ graph TD
 ## Accessibility
 
 1. **ARIA Labels**
+
    - Semantic HTML
    - Role attributes
    - State management
    - Keyboard navigation
 
 2. **Screen Reader Support**
+
    - Alt text
    - ARIA landmarks
    - Focus management
@@ -205,6 +222,7 @@ graph TD
 ## Internationalization
 
 1. **Language Support**
+
    - Translation system
    - RTL support
    - Date formatting
@@ -219,12 +237,14 @@ graph TD
 ## Testing
 
 1. **Unit Tests**
+
    - Component testing
    - Hook testing
    - Utility testing
    - State testing
 
 2. **Integration Tests**
+
    - Page testing
    - Flow testing
    - API integration
@@ -239,12 +259,14 @@ graph TD
 ## Development Guidelines
 
 1. **Code Organization**
+
    - Component structure
    - File naming
    - Import order
    - Code comments
 
 2. **Best Practices**
+
    - React hooks
    - Performance patterns
    - Error handling
@@ -254,4 +276,4 @@ graph TD
    - Component docs
    - Storybook
    - API documentation
-   - Usage examples 
+   - Usage examples

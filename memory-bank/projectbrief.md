@@ -1,17 +1,20 @@
 # Multi-Tenant Learning Management System (LMS) - Project Brief
 
 ## Project Overview
+
 A scalable, multi-tenant Learning Management System designed to support educational institutions and tutoring services operating across multiple branches or locations globally.
 
 ## Core Requirements
 
 ### 1. Multi-Tenant Architecture
+
 - Support for multiple educational institutions/organizations
 - Hierarchical structure: Organization > Branches > Classes > Users
 - Data isolation between different organizations
 - Customizable branding and settings per organization
 
 ### 2. User Management
+
 - Role-based access control (RBAC)
 - User types:
   - Organization Owners/Admins
@@ -21,12 +24,14 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Parents (optional)
 
 ### 3. Branch Management
+
 - Organization can create and manage multiple branches
 - Branch-specific settings and configurations
 - Branch-level analytics and reporting
 - Resource allocation per branch
 
 ### 4. Course Management
+
 - Course creation and organization
 - Content management (text, video, files, etc.)
 - Assignment and assessment tools
@@ -44,6 +49,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Multi-format export (PDF, HTML, Print)
 
 ### 5. User Enrollment
+
 - Student enrollment in courses
 - Teacher assignment to courses
 - Class scheduling and management
@@ -61,12 +67,14 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Bulk student import/export
 
 ### 6. Communication Tools
+
 - Internal messaging system
 - Announcements
 - Discussion forums
 - Email notifications
 
 ### 7. Analytics and Reporting
+
 - Organization-wide analytics
 - Branch-specific reports
 - Student progress tracking
@@ -74,12 +82,14 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 - Custom report generation
 
 ### 8. Content Management
+
 - File storage and management
 - Content versioning
 - Media library
 - Content sharing between branches
 
 ### 9. Security and Compliance
+
 - Data privacy and protection
 - Role-based permissions
 - Audit logging
@@ -87,6 +97,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 - Data backup and recovery
 
 ### 10. Integration Capabilities
+
 - API for third-party integrations
 - SSO support
 - Payment gateway integration
@@ -94,7 +105,9 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 - Video conferencing integration
 
 ### 11. Interactive Educational Content
+
 - **Interactive Quizzes and Assessments**
+
   - Multiple-choice questions
   - True/false questions
   - Short answer questions
@@ -103,6 +116,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Immediate feedback and explanations
 
 - **Interactive Simulations and Labs**
+
   - Virtual science experiments
   - Mathematical modeling tools
   - Language learning exercises
@@ -110,6 +124,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Geographic mapping activities
 
 - **Gamification Elements**
+
   - Points and badges for completing activities
   - Progress bars and achievement tracking
   - Leaderboards (optional, configurable per class)
@@ -117,6 +132,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Rewards for consistent engagement
 
 - **Collaborative Learning Tools**
+
   - Group projects and assignments
   - Peer review systems
   - Collaborative whiteboards
@@ -124,6 +140,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Team-based challenges
 
 - **Adaptive Learning Content**
+
   - Content that adjusts difficulty based on performance
   - Personalized learning paths
   - Remedial content for struggling students
@@ -131,6 +148,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Learning style adaptations
 
 - **Interactive Video Content**
+
   - Embedded questions within videos
   - Clickable hotspots with additional information
   - Video annotations and notes
@@ -138,6 +156,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Interactive transcripts
 
 - **Virtual Reality (VR) and Augmented Reality (AR)**
+
   - VR field trips to historical sites or natural environments
   - AR overlays for science experiments or art history
   - 3D models for anatomy, architecture, or engineering
@@ -154,25 +173,30 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 ## Technical Requirements
 
 ### Scalability
+
 - Support for multiple organizations
 - Handle large number of concurrent users
 - Efficient data storage and retrieval
 - Global deployment capability
 
 ### Performance
+
 - Fast page load times
 - Efficient content delivery
 - Mobile responsiveness
 - Offline capabilities
 
 ### Security
+
 - End-to-end encryption
 - Regular security audits
 - Secure authentication
 - Data backup and recovery
 
 ### Master Data Management
+
 - **Organization Master Data**
+
   - Unique organization identifiers
   - Organization profile information
   - Contact details and addresses
@@ -185,6 +209,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Data retention policies
 
 - **Branch Master Data**
+
   - Unique branch identifiers
   - Branch profile information
   - Physical location details
@@ -197,6 +222,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Branch performance metrics
 
 - **Data Relationships**
+
   - Parent-child relationships between organizations and branches
   - Hierarchical data access controls
   - Cross-branch data sharing policies
@@ -204,6 +230,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Master data synchronization rules
 
 - **Data Governance**
+
   - Data quality standards
   - Master data validation rules
   - Data stewardship assignments
@@ -222,6 +249,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Indexing strategies for performance optimization
 
 ## Success Metrics
+
 - User adoption rate
 - System uptime
 - User satisfaction scores
@@ -229,7 +257,9 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 - Support ticket resolution time
 
 ## Timeline and Phases
+
 1. Phase 1: Core Features (3 months)
+
    - Multi-tenant architecture
    - Basic user management
    - Course management
@@ -238,6 +268,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
    - Simple calendar features
 
 2. Phase 2: Advanced Features (2 months)
+
    - Analytics and reporting
    - Communication tools
    - Integration capabilities
@@ -255,12 +286,14 @@ A scalable, multi-tenant Learning Management System designed to support educatio
    - Flexible enrollment options
 
 ## Constraints and Limitations
+
 - Must support multiple languages
 - Must be accessible 24/7
 - Must comply with international data protection laws
-- Must support various content formats 
+- Must support various content formats
 
 ### 12. Educational Calendar Management
+
 - **Academic Calendar**
   - Term/semester scheduling
   - Holiday and break management
@@ -268,7 +301,6 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Academic year configuration
   - Multiple calendar views (year, term, month, week)
   - Calendar synchronization (import/export)
-  
 - **Course Scheduling**
   - Class session scheduling
   - Recurring session management
@@ -276,7 +308,6 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Conflict detection and resolution
   - Schedule change notifications
   - Attendance tracking integration
-  
 - **Event Management**
   - Academic events and workshops
   - Assignment due dates
@@ -284,7 +315,6 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Parent-teacher meetings
   - Custom event categories
   - Event reminders and notifications
-  
 - **Calendar Integration**
   - Integration with popular calendar services
   - Personal calendar subscriptions
@@ -293,6 +323,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Role-based calendar views
 
 ### 13. Learning Paths
+
 - **Path Creation and Management**
   - Custom learning path templates
   - Sequential course progression
@@ -300,28 +331,24 @@ A scalable, multi-tenant Learning Management System designed to support educatio
   - Skill-based pathways
   - Career-oriented tracks
   - Certification paths
-  
 - **Progress Tracking**
   - Milestone tracking
   - Completion status
   - Time-based progress
   - Achievement badges
   - Learning velocity metrics
-  
 - **Personalization**
   - Individual learning goals
   - Adaptive path recommendations
   - Alternative route suggestions
   - Pace adjustment options
   - Interest-based customization
-  
 - **Path Analytics**
   - Success rate tracking
   - Bottleneck identification
   - Time-to-completion analysis
   - Drop-off point analysis
   - Popular path insights
-  
 - **Path Requirements**
   - Mandatory courses/modules
   - Elective options
@@ -335,12 +362,14 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 ### Badge System
 
 1. **Badge Definition**
+
    - Organizations can create custom badges
    - Define achievement criteria
    - Set badge images and descriptions
    - Configure metadata and attributes
 
 2. **Badge Progress Tracking**
+
    - Real-time progress updates
    - Multiple criteria tracking
    - Progress percentage calculation
@@ -355,12 +384,14 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 ### Certificate System
 
 1. **Certificate Templates**
+
    - Customizable certificate designs
    - Dynamic field mapping
    - Organization branding
    - Multiple template support
 
 2. **Certificate Generation**
+
    - PDF generation
    - Digital signatures
    - Verification codes
@@ -375,6 +406,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 ### Social Media Integration
 
 1. **Sharing Capabilities**
+
    - LinkedIn integration
    - Twitter integration
    - Facebook integration
@@ -389,12 +421,14 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 ### Technical Requirements
 
 1. **Performance**
+
    - Fast badge progress updates
    - Quick certificate generation
    - Efficient verification
    - Scalable sharing
 
 2. **Security**
+
    - Secure verification system
    - Anti-cheating measures
    - Data protection
@@ -411,6 +445,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 ### Course Review System
 
 1. **Review Creation**
+
    - Students can submit course reviews after completion
    - Rating system (1-5 stars)
    - Written feedback and comments
@@ -418,6 +453,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
    - Media attachments (optional)
 
 2. **Review Management**
+
    - Moderation workflow for reviews
    - Flagging inappropriate content
    - Review editing and deletion
@@ -434,6 +470,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 ### Instructor Review System
 
 1. **Review Creation**
+
    - Students can submit instructor reviews
    - Rating system (1-5 stars)
    - Written feedback and comments
@@ -441,6 +478,7 @@ A scalable, multi-tenant Learning Management System designed to support educatio
    - Course-specific context
 
 2. **Review Management**
+
    - Moderation workflow for reviews
    - Flagging inappropriate content
    - Review editing and deletion
@@ -457,12 +495,14 @@ A scalable, multi-tenant Learning Management System designed to support educatio
 ### Technical Requirements
 
 1. **Performance**
+
    - Fast review submission
    - Quick review retrieval
    - Efficient moderation workflow
    - Scalable review storage
 
 2. **Security**
+
    - Review authenticity verification
    - Anti-spam measures
    - Data protection
@@ -472,4 +512,4 @@ A scalable, multi-tenant Learning Management System designed to support educatio
    - API endpoints
    - Webhook support
    - Event tracking
-   - Analytics integration 
+   - Analytics integration

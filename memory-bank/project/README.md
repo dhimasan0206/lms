@@ -79,4 +79,4 @@ This directory contains the project documentation for the Learning Management Sy
 
 ## Project Progress
 
-See individual progress documentation for current status and details. 
+See individual progress documentation for current status and details.

@@ -61,4 +61,4 @@ This directory contains the architectural documentation for the Learning Managem
 
 ## Architecture Diagrams
 
-See individual documentation files for detailed architecture diagrams. 
+See individual documentation files for detailed architecture diagrams.

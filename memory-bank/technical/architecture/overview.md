@@ -15,14 +15,14 @@ graph TD
     API --> Content[Content Service]
     API --> Analytics[Analytics Service]
     API --> Notification[Notification Service]
-    
+
     Auth --> DB[(PostgreSQL)]
     User --> DB
     Course --> DB
     Content --> MongoDB[(MongoDB)]
     Content --> Pinecone[(Pinecone)]
     Analytics --> ES[(Elasticsearch)]
-    
+
     Redis[(Redis Cache)] --> API
     Redis --> Auth
     Redis --> User
@@ -32,12 +32,14 @@ graph TD
 ### Key Components
 
 1. **Client Layer**
+
    - Next.js frontend application
    - Progressive Web App capabilities
    - Responsive design
    - Offline support
 
 2. **API Gateway**
+
    - Request routing
    - Load balancing
    - Rate limiting
@@ -45,6 +47,7 @@ graph TD
    - API documentation (OpenAPI/Swagger)
 
 3. **Microservices**
+
    - Authentication Service
    - User Service
    - Course Service
@@ -53,6 +56,7 @@ graph TD
    - Notification Service
 
 4. **Data Layer**
+
    - PostgreSQL (Primary database)
    - MongoDB (Content storage)
    - Pinecone (Vector database)
@@ -70,12 +74,14 @@ graph TD
 The system implements a hybrid multi-tenant architecture:
 
 1. **Database Level**
+
    - Schema-based isolation
    - Tenant-specific schemas
    - Shared infrastructure
    - Data isolation
 
 2. **Application Level**
+
    - Tenant context middleware
    - Role-based access control
    - Resource isolation
@@ -90,12 +96,14 @@ The system implements a hybrid multi-tenant architecture:
 ## Security Architecture
 
 1. **Authentication**
+
    - JWT-based authentication
    - OAuth2 integration
    - Multi-factor authentication
    - Session management
 
 2. **Authorization**
+
    - Role-based access control
    - Permission management
    - Resource-level access
@@ -110,12 +118,14 @@ The system implements a hybrid multi-tenant architecture:
 ## Scalability Strategy
 
 1. **Horizontal Scaling**
+
    - Stateless services
    - Load balancing
    - Auto-scaling
    - Resource optimization
 
 2. **Performance Optimization**
+
    - Caching strategy
    - Database optimization
    - Content delivery
@@ -130,12 +140,14 @@ The system implements a hybrid multi-tenant architecture:
 ## Integration Patterns
 
 1. **Event-Driven Architecture**
+
    - Message queues
    - Event sourcing
    - Pub/sub patterns
    - Async processing
 
 2. **API Integration**
+
    - RESTful APIs
    - GraphQL support
    - WebSocket connections
@@ -150,18 +162,21 @@ The system implements a hybrid multi-tenant architecture:
 ## Monitoring and Observability
 
 1. **Logging**
+
    - Centralized logging
    - Log aggregation
    - Log analysis
    - Audit trails
 
 2. **Metrics**
+
    - Performance metrics
    - Business metrics
    - Resource utilization
    - Custom metrics
 
 3. **Tracing**
+
    - Distributed tracing
    - Request tracking
    - Performance analysis
@@ -176,12 +191,14 @@ The system implements a hybrid multi-tenant architecture:
 ## Deployment Strategy
 
 1. **Environment Setup**
+
    - Development
    - Staging
    - Production
    - Disaster recovery
 
 2. **Deployment Process**
+
    - Blue-green deployment
    - Canary releases
    - Rollback procedures
@@ -196,18 +213,21 @@ The system implements a hybrid multi-tenant architecture:
 ## Future Considerations
 
 1. **Scalability**
+
    - Global deployment
    - Edge computing
    - Serverless functions
    - Microservices evolution
 
 2. **Integration**
+
    - AI/ML capabilities
    - Blockchain integration
    - IoT devices
    - AR/VR support
 
 3. **Security**
+
    - Zero-trust architecture
    - Advanced threat protection
    - Compliance automation
@@ -217,4 +237,4 @@ The system implements a hybrid multi-tenant architecture:
    - Edge caching
    - Predictive scaling
    - Performance optimization
-   - Resource optimization 
+   - Resource optimization

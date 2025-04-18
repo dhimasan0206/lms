@@ -67,4 +67,4 @@ This directory contains the feature documentation for the Learning Management Sy
 
 ## Feature Implementation Status
 
-See individual feature documentation for implementation status and details. 
+See individual feature documentation for implementation status and details.

@@ -1,0 +1,201 @@
+syntax = "proto3";
+
+package course;
+
+service CourseService {
+  // Create a new course
+  rpc CreateCourse(CreateCourseRequest) returns (CourseResponse) {}
+  
+  // Get a course by ID
+  rpc GetCourse(GetCourseRequest) returns (CourseResponse) {}
+  
+  // Update an existing course
+  rpc UpdateCourse(UpdateCourseRequest) returns (CourseResponse) {}
+  
+  // Delete a course
+  rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse) {}
+  
+  // List courses with filtering and pagination
+  rpc ListCourses(ListCoursesRequest) returns (ListCoursesResponse) {}
+  
+  // Stream updates to a course
+  rpc WatchCourse(WatchCourseRequest) returns (stream CourseResponse) {}
+  
+  // Add content to a course
+  rpc AddCourseContent(AddCourseContentRequest) returns (CourseContentResponse) {}
+  
+  // Get course content
+  rpc GetCourseContent(GetCourseContentRequest) returns (CourseContentResponse) {}
+}
+
+// Request to create a new course
+message CreateCourseRequest {
+  string organization_id = 1;
+  string branch_id = 2;
+  string title = 3;
+  string description = 4;
+  string code = 5;
+  string instructor_id = 6;
+  repeated string tags = 7;
+  CourseStatus status = 8;
+  CourseSettings settings = 9;
+}
+
+// Request to get a course by ID
+message GetCourseRequest {
+  string course_id = 1;
+}
+
+// Request to update an existing course
+message UpdateCourseRequest {
+  string course_id = 1;
+  string title = 2;
+  string description = 3;
+  string code = 4;
+  string instructor_id = 5;
+  repeated string tags = 6;
+  CourseStatus status = 7;
+  CourseSettings settings = 8;
+}
+
+// Request to delete a course
+message DeleteCourseRequest {
+  string course_id = 1;
+}
+
+// Response after deleting a course
+message DeleteCourseResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// Request to list courses with filtering and pagination
+message ListCoursesRequest {
+  string organization_id = 1;
+  string branch_id = 2;
+  CourseStatus status = 3;
+  string instructor_id = 4;
+  string search_text = 5;
+  repeated string tags = 6;
+  int32 page = 7;
+  int32 page_size = 8;
+  string sort_by = 9;
+  bool sort_desc = 10;
+}
+
+// Response containing a list of courses
+message ListCoursesResponse {
+  repeated CourseResponse courses = 1;
+  int32 total_count = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  int32 total_pages = 5;
+}
+
+// Request to watch a course for updates
+message WatchCourseRequest {
+  string course_id = 1;
+}
+
+// Request to add content to a course
+message AddCourseContentRequest {
+  string course_id = 1;
+  string title = 2;
+  string description = 3;
+  ContentType type = 4;
+  string content_data = 5;
+  int32 order = 6;
+  string section_id = 7;
+  map<string, string> metadata = 8;
+}
+
+// Request to get course content
+message GetCourseContentRequest {
+  string content_id = 1;
+}
+
+// Course response message
+message CourseResponse {
+  string id = 1;
+  string organization_id = 2;
+  string branch_id = 3;
+  string title = 4;
+  string description = 5;
+  string code = 6;
+  string instructor_id = 7;
+  repeated string tags = 8;
+  CourseStatus status = 9;
+  CourseSettings settings = 10;
+  string created_at = 11;
+  string updated_at = 12;
+}
+
+// Course content response message
+message CourseContentResponse {
+  string id = 1;
+  string course_id = 2;
+  string title = 3;
+  string description = 4;
+  ContentType type = 5;
+  string content_data = 6;
+  int32 order = 7;
+  string section_id = 8;
+  map<string, string> metadata = 9;
+  string created_at = 10;
+  string updated_at = 11;
+}
+
+// Course status enum
+enum CourseStatus {
+  DRAFT = 0;
+  PUBLISHED = 1;
+  ARCHIVED = 2;
+}
+
+// Content type enum
+enum ContentType {
+  TEXT = 0;
+  VIDEO = 1;
+  IMAGE = 2;
+  DOCUMENT = 3;
+  QUIZ = 4;
+  ASSIGNMENT = 5;
+  LINK = 6;
+  CODE = 7;
+  INTERACTIVE = 8;
+}
+
+// Course settings message
+message CourseSettings {
+  bool allow_enrollment = 1;
+  bool self_enrollment = 2;
+  int32 max_students = 3;
+  string start_date = 4;
+  string end_date = 5;
+  bool hidden = 6;
+  EnrollmentType enrollment_type = 7;
+  GradingSchema grading_schema = 8;
+  map<string, string> custom_settings = 9;
+}
+
+// Enrollment type enum
+enum EnrollmentType {
+  OPEN = 0;
+  INVITE_ONLY = 1;
+  APPROVAL_REQUIRED = 2;
+}
+
+// Grading schema message
+message GradingSchema {
+  repeated GradeRange grade_ranges = 1;
+  bool use_letter_grades = 2;
+  bool use_percentage = 3;
+}
+
+// Grade range message
+message GradeRange {
+  string name = 1;
+  float min_percentage = 2;
+  float max_percentage = 3;
+  string letter_grade = 4;
+} 

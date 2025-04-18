@@ -15,12 +15,14 @@ services:
       - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/lms_api_gateway
       - REDIS_URL=redis://redis:6379/0
       - AUTH_SERVICE_URL=http://auth_service:8001
+      - COURSE_SERVICE_GRPC_URL=course_service:50051
     volumes:
       - ./api-gateway:/app
     depends_on:
       - postgres
       - redis
       - auth_service
+      - course_service
     networks:
       - lms_network
 
@@ -45,6 +47,24 @@ services:
     networks:
       - lms_network
 
+  course_service:
+    build:
+      context: ./course-service
+      dockerfile: Dockerfile
+    ports:
+      - "50051:50051"
+    environment:
+      - ENVIRONMENT=development
+      - GRPC_PORT=50051
+      - GRPC_MAX_WORKERS=10
+      - DATABASE_URL=postgresql+asyncpg://postgres:postgres@postgres:5432/lms_course
+    volumes:
+      - ./course-service:/app
+    depends_on:
+      - postgres
+    networks:
+      - lms_network
+
   postgres:
     image: postgres:15-alpine
     ports:
@@ -52,7 +72,7 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_MULTIPLE_DATABASES=lms_api_gateway,lms_auth
+      - POSTGRES_MULTIPLE_DATABASES=lms_api_gateway,lms_auth,lms_course
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./scripts/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/create-multiple-postgresql-databases.sh

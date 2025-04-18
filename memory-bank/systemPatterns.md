@@ -122,7 +122,7 @@ BadgeDefinition -> BadgeProgress -> EarnedBadge
 CriteriaCheck <* ProgressTracker <* Achievement
 ```
 
-2. **Certificate System**
+1. **Certificate System**
 
 ```code
 CertificateTemplate -> CertificateGenerator -> IssuedCertificate
@@ -359,7 +359,7 @@ flowchart TD
 
 ### Authentication & Authorization
 
-```
+```code
 POST /api/v1/auth/login
 POST /api/v1/auth/register
 POST /api/v1/auth/refresh-token
@@ -371,7 +371,7 @@ GET /api/v1/auth/me
 
 ### Organization Management
 
-```
+```code
 GET /api/v1/organizations
 POST /api/v1/organizations
 GET /api/v1/organizations/{id}
@@ -385,7 +385,7 @@ POST /api/v1/organizations/{id}/branches
 
 ### Branch Management
 
-```
+```code
 GET /api/v1/organizations/{orgId}/branches
 POST /api/v1/organizations/{orgId}/branches
 GET /api/v1/organizations/{orgId}/branches/{id}
@@ -399,7 +399,7 @@ POST /api/v1/organizations/{orgId}/branches/{id}/users
 
 ### User Management
 
-```
+```code
 GET /api/v1/users
 POST /api/v1/users
 GET /api/v1/users/{id}
@@ -415,7 +415,7 @@ GET /api/v1/users/{id}/certificates
 
 ### Course Management
 
-```
+```code
 GET /api/v1/courses
 POST /api/v1/courses
 GET /api/v1/courses/{id}
@@ -431,7 +431,7 @@ GET /api/v1/courses/{id}/analytics
 
 ### Content Management
 
-```
+```code
 GET /api/v1/content
 POST /api/v1/content
 GET /api/v1/content/{id}
@@ -445,7 +445,7 @@ POST /api/v1/content/{id}/media
 
 ### Assessment Management
 
-```
+```code
 GET /api/v1/assessments
 POST /api/v1/assessments
 GET /api/v1/assessments/{id}
@@ -458,7 +458,7 @@ GET /api/v1/assessments/{id}/analytics
 
 ### Badge & Certificate Management
 
-```
+```code
 GET /api/v1/badges
 POST /api/v1/badges
 GET /api/v1/badges/{id}
@@ -475,7 +475,7 @@ POST /api/v1/certificates/{id}/share
 
 ### Analytics & Reporting
 
-```
+```code
 GET /api/v1/analytics/overview
 GET /api/v1/analytics/users
 GET /api/v1/analytics/courses
@@ -490,7 +490,7 @@ GET /api/v1/reports/{id}/download
 
 ### Notification Management
 
-```
+```code
 GET /api/v1/notifications
 POST /api/v1/notifications
 GET /api/v1/notifications/{id}
@@ -504,7 +504,7 @@ GET /api/v1/notifications/templates
 
 ### Integration Endpoints
 
-```
+```code
 GET /api/v1/integrations
 POST /api/v1/integrations
 GET /api/v1/integrations/{id}

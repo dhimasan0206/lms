@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+- first, read from memory-bank
+- execute asked task or query based on memory-bank
+- last, update memory bank

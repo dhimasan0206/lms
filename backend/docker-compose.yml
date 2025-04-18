@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  api_gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - HOST=0.0.0.0
+      - PORT=8000
+      - SECRET_KEY=development_secret_key
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/lms_api_gateway
+      - REDIS_URL=redis://redis:6379/0
+      - AUTH_SERVICE_URL=http://auth_service:8001
+    volumes:
+      - ./api-gateway:/app
+    depends_on:
+      - postgres
+      - redis
+      - auth_service
+    networks:
+      - lms_network
+
+  auth_service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8000"
+    environment:
+      - ENVIRONMENT=development
+      - HOST=0.0.0.0
+      - PORT=8000
+      - SECRET_KEY=development_secret_key
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/lms_auth
+      - REDIS_URL=redis://redis:6379/1
+    volumes:
+      - ./auth-service:/app
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - lms_network
+
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_MULTIPLE_DATABASES=lms_api_gateway,lms_auth
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/create-multiple-postgresql-databases.sh:/docker-entrypoint-initdb.d/create-multiple-postgresql-databases.sh
+    networks:
+      - lms_network
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - lms_network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  lms_network: 

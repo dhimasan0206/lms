@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+.env
+.venv
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Database
+*.sqlite3
+*.db
+
+# Logs
+logs/
+*.log
+
+# Alembic
+/src/infrastructure/database/migrations/versions/*
+!*.py
+
+# Tests
+.coverage
+htmlcov/
+.pytest_cache/
+coverage.xml
+*.cover
+
+# Mac OS
+.DS_Store
+
+# Docker
+.dockerignore 
